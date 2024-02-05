@@ -3,3 +3,4 @@ main
 build
 bin
 .vscode
+.cache

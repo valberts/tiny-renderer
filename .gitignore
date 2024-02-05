@@ -1,0 +1,5 @@
+*.DS_STORE
+main
+build
+bin
+.vscode

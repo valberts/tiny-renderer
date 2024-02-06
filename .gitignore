@@ -6,5 +6,4 @@ bin
 .cache
 .vs
 *.h
-.o
 *.o

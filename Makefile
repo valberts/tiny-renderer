@@ -1,31 +1,22 @@
 SYSCONF_LINK = g++
-CPPFLAGS     = -Iinclude
+CPPFLAGS     =
 LDFLAGS      =
 LIBS         = -lm
 
 DESTDIR = ./
 TARGET  = main
-SRCDIR  = src
-OBJDIR  = build
 
-# Create a list of source files.
-SOURCES := $(wildcard $(SRCDIR)/*.cpp)
-# Create a list of object files by replacing the source directory with the object directory and changing the file extension.
-OBJECTS := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SOURCES))
+OBJECTS := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
 
-# The final build step.
 all: $(DESTDIR)$(TARGET)
 
 $(DESTDIR)$(TARGET): $(OBJECTS)
-	@mkdir -p $(DESTDIR)
-	$(SYSCONF_LINK) -Wall $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(SYSCONF_LINK) -Wall $(LDFLAGS) -o $(DESTDIR)$(TARGET) $(OBJECTS) $(LIBS)
 
-# Rule to compile the source files.
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	@mkdir -p $(OBJDIR)
-	$(SYSCONF_LINK) -Wall $(CPPFLAGS) -c $< -o $@
+$(OBJECTS): %.o: %.cpp
+	$(SYSCONF_LINK) -Wall $(CPPFLAGS) -c $(CFLAGS) $< -o $@
 
 clean:
-	-rm -rf $(OBJDIR)
-	-rm -f $(DESTDIR)$(TARGET)
+	-rm -f $(OBJECTS)
+	-rm -f $(TARGET)
 	-rm -f *.tga

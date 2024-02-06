@@ -4,3 +4,6 @@ build
 bin
 .vscode
 .cache
+.vs
+*.h
+.o
